@@ -1,12 +1,9 @@
 package com.example.pr16;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,8 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
 public class ListContactsActivity extends AppCompatActivity {
 
     // Model = Taula de contactes: utilitzem ArrayList
@@ -31,23 +26,25 @@ public class ListContactsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_contacts);
 
         // Inicialitzem model
         contacts = new ArrayList<String>();
 
         try {
             // Obrim l'arxiu 'contactes.txt' des del directori Assets
-            InputStream inputStream = this.getAssets().open("contactes.txt");
+            InputStream inputStream = openFileInput("contactes.txt");
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
-                // Afegim cada línia de l'arxiu a l'ArrayList
+                // Afegim cada línia de l'arxiu a l'ArrayList de contactes
                 contacts.add(line);
             }
-            // Tanquem l'arxiu
+
+            inputStream.close();
+            inputStreamReader.close();
             bufferedReader.close();
 
         } catch (IOException | RuntimeException e) {
@@ -71,7 +68,7 @@ public class ListContactsActivity extends AppCompatActivity {
         };
 
         // Busquem la ListView i li endollem l'ArrayAdapter
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ListView lv = findViewById(R.id.contactsView);
+        ListView lv = findViewById(R.id.contactsView);
         lv.setAdapter(adapter);
     }
 }
