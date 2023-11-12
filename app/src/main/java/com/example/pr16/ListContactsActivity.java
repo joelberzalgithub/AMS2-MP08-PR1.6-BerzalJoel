@@ -1,8 +1,10 @@
 package com.example.pr16;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +23,6 @@ public class ListContactsActivity extends AppCompatActivity {
     ArrayList<String> contacts;
     // ArrayAdapter serà l'intermediari amb la ListView
     ArrayAdapter<String> adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -70,5 +71,13 @@ public class ListContactsActivity extends AppCompatActivity {
         // Busquem la ListView i li endollem l'ArrayAdapter
         ListView lv = findViewById(R.id.contactsView);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ListContactsActivity.this, EditContactsActivity.class);
+                intent.putExtra("contacte", position);
+                startActivity(intent);
+            }
+        });
     }
 }
