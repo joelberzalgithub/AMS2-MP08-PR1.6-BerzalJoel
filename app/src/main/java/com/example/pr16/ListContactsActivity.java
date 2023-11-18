@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -77,6 +78,14 @@ public class ListContactsActivity extends AppCompatActivity {
                 Intent intent = new Intent(ListContactsActivity.this, EditContactsActivity.class);
                 intent.putExtra("contacte", position);
                 startActivity(intent);
+            }
+        });
+
+        // Botó per tornar a obrir la classe 'MainActivity.java'
+        Button b3 = (Button) findViewById(R.id.b3);
+        b3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(ListContactsActivity.this, MainActivity.class));
             }
         });
     }

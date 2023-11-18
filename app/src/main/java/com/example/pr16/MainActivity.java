@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String contacte = editTextNom.getText().toString() + "; " + editTextCognoms.getText().toString() + "; " + editTextTfn.getText().toString() + "; " + editTextEmail.getText().toString();
                 try {
                     FileOutputStream fileOutputStream = getApplicationContext().openFileOutput("contactes.txt", Context.MODE_APPEND);
